@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <!--jedis创建-->
+    <bean name="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxTotal" value="50"></property>
+        <property name="maxIdle" value="25"></property>
+        <property name="minIdle" value="5"></property>
+    </bean>
+    <bean name="jedisPool" class="redis.clients.jedis.JedisPool">
+
+        <constructor-arg name="poolConfig" ref="poolConfig"></constructor-arg>
+        <constructor-arg name="host" value="192.168.72.142"></constructor-arg>
+        <constructor-arg name = "port" value="6379"></constructor-arg>
+    </bean>
+    <!--包扫描-->
+     <context:component-scan base-package="com.jing.service"></context:component-scan>
+
+    <!--dubbo的消费端的配置-->
+    <!-- 引用dubbo 服务 -->
+    <dubbo:application name="gossip-searchPortal"/>
+    <!--zookeeper集群地址-->
+    <dubbo:registry protocol="zookeeper" address="192.168.72.141:2181,192.168.72.142:2181,192.168.72.143:2181"/>
+    <!--扫描@reference注解的类-->
+    <dubbo:annotation package="com.jing.service"/>
+
+</beans>

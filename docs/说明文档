@@ -1,0 +1,7 @@
+1.首先要开启zookeeper集群
+2.开启solr集群
+3.修改配置文件中的zookeeper集群地址和数据库连接地址
+4.导入sql文件
+5.开启search-service服务
+6.开启gossip-searchPortal服务
+7.可以运行测试了http://localhost:9002
