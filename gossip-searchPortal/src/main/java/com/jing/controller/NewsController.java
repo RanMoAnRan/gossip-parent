@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.URLDecoder;
 import java.util.List;
 
 /**
@@ -57,6 +58,11 @@ public class NewsController {
             if (StringUtils.isEmpty(resultBean.getKeywords())) {
                 return null;
             }
+
+
+            String keywords = URLDecoder.decode(resultBean.getKeywords(), "utf-8");
+            System.out.println("keywords：" + keywords);
+            resultBean.setKeywords(keywords);
 
 
             //如果前端没有传递分页，设置一个默认的分页参数

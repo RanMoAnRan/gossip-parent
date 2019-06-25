@@ -13,6 +13,10 @@
         <module>search-service</module>
         <module>gossip-pojo</module>
         <module>gossip-searchPortal</module>
+        <module>cache-service</module>
+        <module>gossip-storm</module>
+        <module>gossip_storm_realboard</module>
+        <module>gossip_log_monitor</module>
     </modules>
 
 
